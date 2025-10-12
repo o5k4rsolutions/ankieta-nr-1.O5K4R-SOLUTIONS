@@ -1,0 +1,344 @@
+!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ankieta Opinii o Projekcie</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f0f4f8;
+        }
+        .form-step {
+            transition: opacity 0.4s ease-out, transform 0.4s ease-out;
+            transform: translateY(16px);
+            opacity: 0;
+            min-height: 150px;
+            display: none;
+        }
+        .form-step.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        #successBanner {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            transform: translateY(-100%);
+            transition: transform 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275); 
+            z-index: 50;
+        }
+        #successBanner.show {
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body class="p-4 sm:p-8 flex justify-center items-start min-h-screen">
+
+    <div id="successBanner" class="bg-green-600 shadow-xl text-white p-4 text-center">
+        <div class="max-w-7xl mx-auto flex justify-center items-center">
+            <svg class="w-6 h-6 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+            </svg>
+            <p class="font-semibold text-lg">Dziękujemy za wypełnienie ankiety! Dzięki Tobie możemy ulepszać nasze projekty.</p>
+        </div>
+    </div>
+    
+    <div id="formContainer" class="w-full max-w-2xl bg-white p-6 sm:p-10 rounded-xl shadow-2xl border border-blue-100">
+
+        <header class="text-center mb-8">
+            <h1 class="text-3xl font-bold text-blue-800 mb-2">Ankieta: Jakość projektów O5K4R</h1>
+            <p class="text-gray-600" id="stepIndicator">Krok 1 z 5</p>
+        </header>
+
+        <form id="feedbackForm" action="https://formspree.io/f/xvgwvpre" method="POST" class="space-y-6">
+
+            <div data-step="1" class="form-step p-5 bg-blue-50 rounded-lg shadow-inner">
+                <div class="space-y-4">
+                    <p class="text-xl font-semibold text-blue-700">Szanowny Kliencie,</p>
+                    <p class="text-gray-700 text-lg">Prosimy o poświęcenie chwili czasu na wypełnienie ankiety.</p>
+                    
+                    <div class="p-4 bg-white border border-blue-200 rounded-lg text-sm text-gray-700 max-h-60 overflow-y-auto shadow-md">
+                        <p class="font-bold mb-2 text-blue-800 text-base">Regulamin Ankiet O5K4R</p>
+                        
+                        <ol class="list-decimal list-inside space-y-1 ml-4">
+                            <li>
+                                <b>Cel Ankiety:</b> Ankieta ma na celu zebranie Twojej opinii na temat jakości, użyteczności i potencjału rozwoju naszych projektów.
+                            </li>
+                            <li>
+                                <b>Anonimowość Danych:</b> Wszystkie Twoje odpowiedzi (poza opcjonalnie podanym adresem e-mail) są zbierane <b>anonimowo</b> i będą wykorzystywane wyłącznie w celach statystycznych i rozwojowych.
+                            </li>
+                            <li>
+                                <b>Wykorzystanie Danych:</b> Dane z ankiety posłużą nam do identyfikacji obszarów wymagających poprawy, priorytetyzacji nowych funkcjonalności oraz lepszego dopasowania przyszłych produktów do Twoich potrzeb.
+                            </li>
+                            <li>
+                                <b>Opcjonalny Kontakt:</b> Opcjonalne podanie adresu e-mail służy wyłącznie możliwości kontaktu w celu doprecyzowania Twojej opinii lub przekazania informacji zwrotnej dotyczącej wdrożonych ulepszeń. Adres e-mail nie zostanie powiązany z Twoimi anonimowymi odpowiedziami w analizach statystycznych.
+                            </li>
+                            <li>
+                                <b>Akceptacja:</b> Kliknięcie przycisku "Akceptuję regulamin i rozpocznij" oznacza akceptację niniejszego regulaminu.
+                            </li>
+                        </ol>
+
+                        <p class="mt-4 font-semibold text-blue-800">
+                            Dziękujemy za wkład w ulepszanie naszych projektów!
+                        </p>
+                    </div>
+                    
+                    <p class="text-gray-700 font-semibold pt-2">Kliknij przycisk poniżej, aby zaakceptować regulamin i rozpocząć.</p>
+                </div>
+            </div>
+
+            <div data-step="2" class="form-step p-5 bg-blue-50 rounded-lg shadow-inner">
+                <label class="block text-lg font-semibold text-blue-700 mb-3">
+                    1. Jak oceniasz ogólną jakość wcześniejszych projektów?
+                </label>
+                <div class="flex flex-wrap justify-between items-center space-x-2 sm:space-x-4">
+                    <span class="text-sm text-gray-500">1 (Zła)</span>
+                    <label class="flex flex-col items-center">
+                        <input type="radio" name="ocena_ogolna" value="1" required
+                               class="form-radio text-red-500 h-5 w-5 focus:ring-red-500">
+                        <span class="mt-1 text-sm text-gray-700">1</span>
+                    </label>
+                    <label class="flex flex-col items-center">
+                        <input type="radio" name="ocena_ogolna" value="2"
+                               class="form-radio text-yellow-500 h-5 w-5 focus:ring-yellow-500">
+                        <span class="mt-1 text-sm text-gray-700">2</span>
+                    </label>
+                    <label class="flex flex-col items-center">
+                        <input type="radio" name="ocena_ogolna" value="3"
+                               class="form-radio text-yellow-600 h-5 w-5 focus:ring-yellow-600">
+                        <span class="mt-1 text-sm text-gray-700">3</span>
+                    </label>
+                    <label class="flex flex-col items-center">
+                        <input type="radio" name="ocena_ogolna" value="4"
+                               class="form-radio text-green-500 h-5 w-5 focus:ring-green-500">
+                        <span class="mt-1 text-sm text-gray-700">4</span>
+                    </label>
+                    <label class="flex flex-col items-center">
+                        <input type="radio" name="ocena_ogolna" value="5"
+                               class="form-radio text-green-700 h-5 w-5 focus:ring-green-700">
+                        <span class="mt-1 text-sm text-gray-700">5</span>
+                    </label>
+                    <span class="text-sm text-gray-500">5 (Doskonała)</span>
+                </div>
+            </div>
+
+            <div data-step="3" class="form-step p-5 bg-blue-50 rounded-lg shadow-inner">
+                <label for="najlepsza_funkcjonalnosc" class="block text-lg font-semibold text-blue-700 mb-3">
+                    2. Co najbardziej Ci się podobało w poprzednich projektach? 
+                </label>
+                <input type="text" name="najlepsza_funkcjonalnosc" id="najlepsza_funkcjonalnosc"
+                       placeholder="Np. Łatwość obsługi lub konkretna funkcja..."
+                       class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500">
+            </div>
+
+            <div data-step="4" class="form-step p-5 bg-blue-50 rounded-lg shadow-inner">
+                <label for="propozycje_ulepszen" class="block text-lg font-semibold text-blue-700 mb-3">
+                    3. Jakie masz propozycje ulepszeń lub co należy poprawić w następnych projektach? 
+                </label>
+                <textarea name="propozycje_ulepszen" id="propozycje_ulepszen" rows="4" required
+                          placeholder="Twoje szczegółowe uwagi..."
+                          class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"></textarea>
+            </div>
+
+            <div data-step="5" class="form-step p-5 bg-blue-50 rounded-lg shadow-inner">
+                <label for="email_kontaktowy" class="block text-lg font-semibold text-blue-700 mb-3">
+                    4. Jeśli chcesz, abyśmy się z Tobą skontaktowali, podaj swój adres e-mail (opcjonalnie):
+                </label>
+                <input type="email" name="_replyto" id="email_kontaktowy"
+                       placeholder="twoj.email@przyklad.pl"
+                       class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500">
+            </div>
+            
+            <div class="flex justify-between pt-6">
+                <button type="button" id="backButton" disabled
+                        class="px-6 py-2 border border-gray-300 rounded-lg text-base font-medium text-gray-700 bg-white hover:bg-gray-100 transition duration-150 ease-in-out disabled:opacity-50 disabled:cursor-not-allowed">
+                    Wstecz
+                </button>
+
+                <button type="button" id="nextButton"
+                        class="px-6 py-2 border border-transparent rounded-lg shadow-md text-base font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition duration-150 ease-in-out">
+                    Akceptuję regulamin i rozpocznij
+                </button>
+
+                <button type="submit" id="submitButton"
+                        class="hidden w-full py-3 px-4 border border-transparent rounded-lg shadow-md text-lg font-medium text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 transition duration-150 ease-in-out">
+                    Wyślij Ankietę
+                </button>
+            </div>
+            
+            <footer class="mt-8 pt-4 border-t border-gray-200 text-center">
+                <a href="https://formspree.io" target="_blank" rel="noopener noreferrer"
+                   class="inline-flex items-center text-sm font-medium text-gray-500 hover:text-blue-600 transition">
+                   <span class="mr-1 text-lg text-blue-500">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4">
+                            <polyline points="20 6 9 17 4 12"></polyline>
+                        </svg>
+                   </span>
+                   <span class="font-bold">Powered by: Formspree</span>
+                </a>
+            </footer>
+
+        </form>
+    </div>
+
+    <!-- Custom Message Box (Zamiast alert()) -->
+    <div id="messageBox" class="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-red-600 text-white p-4 rounded-lg shadow-xl z-50 transition duration-300 opacity-0 pointer-events-none transform scale-95" style="min-width: 300px;">
+        <p id="messageText" class="font-semibold"></p>
+        <button onclick="document.getElementById('messageBox').classList.remove('opacity-100', 'scale-100'); document.getElementById('messageBox').classList.add('opacity-0', 'scale-95', 'pointer-events-none');" class="absolute top-1 right-2 text-xl font-bold">&times;</button>
+    </div>
+
+        <script>
+            let currentStep = 1;
+            const totalSteps = 5; 
+            const formSteps = document.querySelectorAll('.form-step');
+            const nextButton = document.getElementById('nextButton');
+            const backButton = document.getElementById('backButton');
+            const submitButton = document.getElementById('submitButton');
+            const stepIndicator = document.getElementById('stepIndicator');
+            const form = document.getElementById('feedbackForm');
+            const messageBox = document.getElementById('messageBox');
+            const messageText = document.getElementById('messageText');
+
+            function showMessage(message) {
+                messageText.textContent = message;
+                messageBox.classList.remove('opacity-0', 'scale-95', 'pointer-events-none');
+                messageBox.classList.add('opacity-100', 'scale-100');
+                setTimeout(() => {
+                    messageBox.classList.remove('opacity-100', 'scale-100');
+                    messageBox.classList.add('opacity-0', 'scale-95', 'pointer-events-none');
+                }, 4000); 
+            }
+
+            function showStep(step) {
+                if (step < 1 || step > totalSteps) return;
+                
+                formSteps.forEach(s => {
+                    s.style.display = 'none';
+                    s.classList.remove('active');
+                });
+
+                const currentStepElement = document.querySelector(`[data-step="${step}"]`);
+                if (currentStepElement) {
+                    currentStepElement.style.display = 'block';
+                    setTimeout(() => currentStepElement.classList.add('active'), 50); 
+                }
+
+                currentStep = step;
+                stepIndicator.textContent = `Krok ${currentStep} z ${totalSteps}`;
+
+                backButton.disabled = (currentStep === 1);
+                
+                if (currentStep === 1) {
+                    nextButton.textContent = "Akceptuję regulamin i rozpocznij";
+                } else {
+                    nextButton.textContent = "Dalej";
+                }
+
+                if (currentStep === totalSteps) {
+                    nextButton.classList.add('hidden');
+                    submitButton.classList.remove('hidden');
+                    submitButton.classList.add('flex');
+                } else {
+                    nextButton.classList.remove('hidden');
+                    submitButton.classList.add('hidden');
+                    submitButton.classList.remove('flex');
+                }
+            }
+            
+            function validateCurrentStep() {
+                if (currentStep === 1) {
+                    return true;
+                } 
+                
+                const currentStepElement = document.querySelector(`[data-step="${currentStep}"]`);
+                
+                if (currentStep === 2) {
+                    return document.querySelector('input[name="ocena_ogolna"]:checked') !== null;
+                } 
+                
+                if (currentStep === 4) {
+                    const textarea = currentStepElement.querySelector('textarea[required]');
+                    return textarea && textarea.value.trim().length > 0;
+                }
+
+                return true;
+            }
+
+            nextButton.addEventListener('click', () => {
+                if (validateCurrentStep()) {
+                     showStep(currentStep + 1);
+                } else {
+                    console.error("Wymagane pole jest puste.");
+                    if (currentStep === 2) {
+                         showMessage("Proszę wybrać ocenę ogólną, aby przejść dalej.");
+                    } else if (currentStep === 4) {
+                         showMessage("Proszę wpisać swoje propozycje ulepszeń, aby przejść dalej.");
+                    } else {
+                         showMessage("Proszę odpowiedzieć na wymagane pytanie przed przejściem dalej.");
+                    }
+                }
+            });
+
+            backButton.addEventListener('click', () => {
+                showStep(currentStep - 1);
+            });
+            
+            const successBanner = document.getElementById('successBanner');
+            const formContainer = document.getElementById('formContainer');
+
+            function showSuccessBanner() {
+                successBanner.classList.add('show');
+                formContainer.classList.add('hidden'); 
+            }
+
+            form.addEventListener('submit', function(event) {
+                event.preventDefault(); 
+
+                const data = new FormData(event.target);
+                const url = event.target.action;
+
+                submitButton.disabled = true;
+                submitButton.textContent = "Wysyłanie...";
+
+                fetch(url, {
+                    method: 'POST',
+                    body: data,
+                    headers: {
+                        'Accept': 'application/json'
+                    }
+                })
+                .then(response => {
+                    if (response.ok) {
+                        showSuccessBanner();
+                    } else {
+                        if (response.status === 403) {
+                            console.error("Błąd Formspree: Sprawdź, czy hash formularza w polu 'action' (https://formspree.io/f/your_form_hash) jest poprawny i aktywny. Status 403 oznacza, że serwer Formspree odrzucił żądanie. Wymaga to ręcznej zmiany hasha w kodzie.");
+                            showMessage("Błąd wysyłania (403). Sprawdź, czy hash formularza Formspree jest poprawny!");
+                        } else {
+                            console.error("Błąd wysyłania do Formspree:", response.status, response.statusText);
+                            showMessage("Błąd wysyłania. Spróbuj ponownie lub sprawdź, czy hash Formspree jest poprawny.");
+                        }
+                    }
+                })
+                .catch(error => {
+                    console.error("Błąd sieci:", error);
+                    showMessage("Wystąpił błąd sieci. Spróbuj ponownie.");
+                })
+                .finally(() => {
+                    submitButton.disabled = false;
+                    submitButton.textContent = "Wyślij Ankietę";
+                });
+            });
+
+            showStep(1);
+
+        </script>
+    </div>
+
+</body>
+</html>
